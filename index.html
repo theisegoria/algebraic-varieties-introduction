@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="An eight-page visual introduction to algebraic varieties, with an interactive smooth-to-singular curve laboratory.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>A Visual Introduction to Algebraic Varieties</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --bg: light-dark(#f5f8fa, #081723);
+      --surface: light-dark(#ffffff, #102536);
+      --ink: light-dark(#102a43, #edf6fb);
+      --muted: light-dark(#5d7180, #afc2ce);
+      --line: light-dark(#d6e0e6, #294456);
+      --teal: light-dark(#008f82, #55d7ca);
+      --blue: light-dark(#2c7be5, #76a9ff);
+      --soft: light-dark(#e7f7f4, #12383d);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--ink); }
+    a { color: inherit; }
+    main { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 74px 0 52px; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(270px, .62fr); gap: 56px; align-items: center; }
+    .eyebrow { color: var(--teal); font-size: .78rem; font-weight: 750; letter-spacing: .13em; text-transform: uppercase; }
+    h1 { max-width: 760px; margin: 13px 0 20px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.7rem, 7vw, 5.4rem); line-height: .96; letter-spacing: -.045em; }
+    .lead { max-width: 730px; margin: 0; color: var(--muted); font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.1rem, 2vw, 1.38rem); line-height: 1.55; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 19px; border: 1px solid var(--line); border-radius: 999px; font-weight: 720; text-decoration: none; }
+    .button.primary { border-color: var(--ink); background: var(--ink); color: var(--bg); }
+    .cover { margin: 0; transform: rotate(1.4deg); }
+    .cover img { display: block; width: 100%; border-radius: 9px; box-shadow: 0 28px 70px light-dark(#102a4327, #0008); }
+    .cover figcaption { margin-top: 12px; color: var(--muted); font-size: .82rem; text-align: center; }
+    .route { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 78px 0 0; }
+    .route article { padding-top: 16px; border-top: 2px solid var(--line); }
+    .route strong { display: block; margin-bottom: 7px; font-size: 1rem; }
+    .route span { color: var(--muted); font-size: .92rem; line-height: 1.48; }
+    section { margin-top: 84px; }
+    section h2 { margin: 0 0 12px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 4vw, 3.35rem); letter-spacing: -.035em; }
+    .section-lead { max-width: 760px; margin: 0 0 26px; color: var(--muted); font-size: 1.04rem; line-height: 1.58; }
+    .lab-frame { overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); }
+    iframe { display: block; width: 100%; height: 650px; border: 0; background: transparent; }
+    .download { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; padding: 28px; border-radius: 18px; background: var(--soft); }
+    .download h2 { margin-bottom: 7px; font-size: clamp(1.65rem, 3vw, 2.45rem); }
+    .download p { margin: 0; color: var(--muted); line-height: 1.5; }
+    footer { margin-top: 74px; padding-top: 19px; border-top: 1px solid var(--line); color: var(--muted); font-size: .86rem; }
+    @media (max-width: 820px) {
+      main { padding-top: 46px; }
+      .hero { grid-template-columns: 1fr; gap: 34px; }
+      .cover { width: min(430px, 90%); margin-inline: auto; }
+      .route { grid-template-columns: 1fr 1fr; }
+      iframe { height: 720px; }
+    }
+    @media (max-width: 540px) {
+      .route { grid-template-columns: 1fr; }
+      .download { grid-template-columns: 1fr; }
+      iframe { height: 610px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <div>
+        <div class="eyebrow">Eight-page visual primer</div>
+        <h1>Algebraic varieties</h1>
+        <p class="lead">See how polynomial equations become spaces, why singularities matter, and how coordinate rings let geometry and algebra answer one another.</p>
+        <div class="actions">
+          <a class="button primary" href="report.pdf">Read the PDF</a>
+          <a class="button" href="#curve-lab">Explore the curve lab</a>
+        </div>
+      </div>
+      <figure class="cover">
+        <img src="cover.png" alt="Cover of A Visual Introduction to Algebraic Varieties">
+        <figcaption>A4 PDF, 8 pages, vector diagrams</figcaption>
+      </figure>
+    </header>
+
+    <div class="route" aria-label="Learning route">
+      <article><strong>Equations become spaces</strong><span>Read V(I) as the common zero set of a polynomial system.</span></article>
+      <article><strong>Zoom in locally</strong><span>Use gradients and the Jacobian to distinguish smooth and singular points.</span></article>
+      <article><strong>Turn shapes into rings</strong><span>Encode polynomial functions in the coordinate ring k[V].</span></article>
+      <article><strong>Add infinity</strong><span>Homogenize equations and see why projective closure improves geometry.</span></article>
+    </div>
+
+    <section id="curve-lab">
+      <div class="eyebrow">Interactive companion</div>
+      <h2>Watch smoothness fail</h2>
+      <p class="section-lead">Vary the coefficients in y²=x³+ax+b. A curve becomes singular exactly when its cubic acquires a repeated root.</p>
+      <div class="lab-frame">
+        <iframe src="curve-lab.html" title="Interactive smooth and singular cubic curve laboratory"></iframe>
+      </div>
+    </section>
+
+    <section class="download" aria-label="Download the booklet">
+      <div>
+        <h2>Keep the complete primer</h2>
+        <p>Eight concise pages covering zero sets, ideals, singularities, coordinate rings, maps, and projective closure.</p>
+      </div>
+      <a class="button primary" href="report.pdf" download>Download PDF</a>
+    </section>
+
+    <footer>Written and designed by Benjamin Michael Haire. Educational introduction; conventions are stated in the booklet.</footer>
+  </main>
+</body>
+</html>
